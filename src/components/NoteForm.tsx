@@ -1,6 +1,6 @@
 import { api } from "~/utils/api";
 
-import { useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 
 interface FormData {
   title: string,
@@ -11,7 +11,7 @@ export default function NoteForm() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const { mutate } = api.note.addNote.useMutation();
-  const onSubmit = (formData: FormData) => {
+  const onSubmit: SubmitHandler<FormData> = (formData: FormData) => {
     mutate({ content: formData.content, title: formData.title });
     reset();
   };
