@@ -10,8 +10,11 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
+model Note {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+    title String
+    content String
+    userId String
 }

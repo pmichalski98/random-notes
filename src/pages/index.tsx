@@ -1,10 +1,20 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { SignOutButton, useUser } from "@clerk/nextjs";
+import { useForm } from "react-hook-form";
+import { api } from "~/utils/api";
 
+interface FormData {
+  title: string,
+  content: string,
+}
 const Home: NextPage = () => {
-  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const { mutate } = api.note.addNote.useMutation();
   const { user } = useUser();
+  const { register,  handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = (formData: FormData) => {
+    mutate(formData)
+  }
   return (
     <>
       <Head>
@@ -14,12 +24,20 @@ const Home: NextPage = () => {
       </Head>
       <nav className=" flex  py-4 justify-between items-center border-b-2 px-10">
         <span className="capitalize">{user?.firstName}</span>
-        <div className="rounded border p-2">
+        <div className="rounded border p-2">ł
           <SignOutButton />
         </div>
       </nav>
-      <main className="mx-auto w-10/12 flex justify-center">
-        <h1 className="">Add new note</h1>
+      <main className="mx-auto w-10/12">
+        <h1 className="my-6 text-4xl text-center">Add new note</h1>
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+        <form className="flex flex-col gap-4 text-center mx-auto py-6 px-12 border-2 max-w-sm" onSubmit={handleSubmit(onSubmit)}>
+          <input placeholder="Title" className="bg-transparent text-center" {...register("title")} />
+          <textarea placeholder="Content..." className="bg-transparent text-center" {...register("content", { required: true })} />
+          {/* errors will return when field validation fails  */}
+          {errors.exampleRequired && <span>This field is required</span>}
+        <button className="border-2 rounded bg-rose-400 px-3 text-white py-1.5">Submit</button>
+        </form>
       </main>
     </>
   );
