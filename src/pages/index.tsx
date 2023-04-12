@@ -1,20 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useUser } from "@clerk/nextjs";
-import { api } from "~/utils/api";
 import NavBar from "~/components/NavBar";
 import NoteForm from "~/components/NoteForm";
 
-interface FormData {
-  title: string,
-  content: string,
-}
+
 const Home: NextPage = () => {
-  const { mutate } = api.note.addNote.useMutation();
-  const { user } = useUser();
-  const onSubmit = (formData: FormData) => {
-    mutate(formData)
-  }
+
   return (
     <>
       <Head>
