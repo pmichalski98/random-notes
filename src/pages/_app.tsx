@@ -4,8 +4,7 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import { useRouter } from "next/router";
-import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut, SignIn, SignInButton } from "@clerk/nextjs";
-import theme from "tailwindcss/defaultTheme";
+import { ClerkProvider, SignedIn, SignedOut, SignIn } from "@clerk/nextjs";
 
 const publicPages: Array<string> = [];
 
@@ -15,7 +14,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   // Check if the current route matches a public page
   const isPublicPage = publicPages.includes(pathname);
   return (
-    <div className=" text-slate-300 flex min-h-screen flex-col items-center justify-center bg-gray-900">
+    <div className=" text-slate-300 min-h-screen bg-gray-900">
     <ClerkProvider {...pageProps} >
       {isPublicPage ? (
         <Component {...pageProps} />
