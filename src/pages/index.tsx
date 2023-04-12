@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { api } from "~/utils/api";
+import { SignedOut, SignOutButton } from "@clerk/nextjs";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
       </Head>
       <main className=" text-slate-300 flex min-h-screen flex-col items-center justify-center bg-gray-900">
         <h1 className="">halo</h1>
+        <SignOutButton/>
       </main>
     </>
   );
