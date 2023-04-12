@@ -1,16 +1,16 @@
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 import { z } from "zod";
 
 export const noteRouter = createTRPCRouter({
-  addNote: publicProcedure.
+  addNote: privateProcedure.
   input(
     z.object({
       title: z.string(),
       content: z.string(),
     })
   ).mutation( async ({ctx, input}) => {
-    await ctx.prisma.note.create({
+     return await ctx.prisma.note.create({
       data: {
         title: input.title,
         content: input.content,
