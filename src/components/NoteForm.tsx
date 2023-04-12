@@ -22,8 +22,6 @@ export default function NoteForm() {
     <input placeholder="Title" className="bg-transparent text-center" {...register("title")} />
     <textarea placeholder="Content goes here"
               className="bg-transparent text-center" {...register("content", { required: true })} />
-    {/* errors will return when field validation fails  */}
-    {errors.exampleRequired && <span>This field is required</span>}
     <button className="border-2 rounded bg-rose-400 px-3 text-white py-1.5">Submit</button>
   </form>;
 }
