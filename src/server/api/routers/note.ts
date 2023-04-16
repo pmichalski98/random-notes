@@ -22,7 +22,7 @@ export const noteRouter = createTRPCRouter({
   getNotes: privateProcedure
     .query(async ({ctx}) => {
       const notes = await ctx.prisma.note.findMany({where: { userId: ctx.userId }})
-      if (!notes) throw new TRPCError("NOT_FOUND", "NOT_FOUND");
+      if (!notes) throw new TRPCError({code: "NOT_FOUND", message: "NO NOTES WERE CREATED YET"});
       return notes;
     }),
   deleteNote: privateProcedure
@@ -33,7 +33,7 @@ export const noteRouter = createTRPCRouter({
           id: input
         }
       })
-      if(!deletedNote) throw new TRPCError("NOT_FOUND", "NOT_FOUND");
+      if(!deletedNote) throw new TRPCError({code: "NOT_FOUND", message: "UNABLE TO DELETE"});
       return deletedNote;
     })
 });
