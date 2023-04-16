@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import NavBar from "~/components/NavBar";
 import NoteForm from "~/components/NoteForm";
+import NoteList from "~/components/NoteList";
 
 
 const Home: NextPage = () => {
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
       <main className="mx-auto w-10/12">
         <h1 className="my-6 text-4xl text-center">Add new note</h1>
        <NoteForm/>
+        <NoteList/>
       </main>
     </>
   );

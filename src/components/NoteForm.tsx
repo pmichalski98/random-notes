@@ -8,9 +8,7 @@ interface FormData {
 }
 
 export default function NoteForm() {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
-
-  //@TODO FIX THIS TYPESCRIPT ERROR
+  const { register, handleSubmit, reset } = useForm<FormData>();
   const { mutate } = api.note.addNote.useMutation();
   const onSubmit: SubmitHandler<FormData> = (formData: FormData) => {
     mutate({ content: formData.content, title: formData.title });
